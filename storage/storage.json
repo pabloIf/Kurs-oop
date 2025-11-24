@@ -1,0 +1,58 @@
+{
+    "flights": [
+        {
+            "flight_id": 3,
+            "origin": "Rome",
+            "destination": "Warsaw",
+            "departure": "2026-01-01-14:00",
+            "arrival": "2026-01-01-16:05",
+            "seats": {
+                "first_class": 0,
+                "business_class": 28,
+                "econom_class": 70
+            }
+        },
+        {
+            "flight_id": 4,
+            "origin": "Tokio",
+            "destination": "Singapore",
+            "departure": "2026-01-04-13:00",
+            "arrival": "2026-01-04-21:00",
+            "seats": {
+                "first_class": 19,
+                "business_class": 20,
+                "econom_class": 140
+            }
+        }
+    ],
+    "tickets": [
+        {
+            "ticket_id": 1,
+            "flight_id": 3,
+            "user_id": 3,
+            "seat_class": "business_class",
+            "quantity": 2
+        },
+        {
+            "ticket_id": 2,
+            "flight_id": 4,
+            "user_id": 3,
+            "seat_class": "first_class",
+            "quantity": 1
+        }
+    ],
+    "users": [
+        {
+            "user_id": 1,
+            "username": "admin",
+            "password": "0000",
+            "role": "admin"
+        },
+        {
+            "user_id": 3,
+            "username": "Lily",
+            "password": "4444",
+            "role": "user"
+        }
+    ]
+}
