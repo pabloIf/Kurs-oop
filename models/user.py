@@ -16,3 +16,10 @@ class User:
             "password": self.password,
             "role": self.role
         }
+    
+    def __str__(self):
+        return (
+            f"\nUser #{self.user_id}\n"
+            f"Username: {self.username}\n"
+            f"Role: {self.role}\n"
+        )

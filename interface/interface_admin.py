@@ -117,13 +117,13 @@ class AdminInterface:
         if not flights:
             print("No flights found")
         for f in flights:
-            print(f.to_json())
+            print(f)
 
     def search_flight(self):
         try:
             flight_id = int(input("Enter flight ID: "))
             flight = self.flight_service.get_flight_by_id(flight_id)
-            print(flight.to_json())
+            print(flight)
         except NotFoundError as e:
             print(e)
         except ValueError:
@@ -171,15 +171,16 @@ class AdminInterface:
     def review_users(self):
         users = self.user_service.get_all_users()
         for u in users:
-            print(u.to_json())
+            print(u)
     
     def search_user_by_id(self):
         try:
             user_id = int(input("User ID: "))
             user = self.user_service.get_user_by_id(user_id)
             user_tickets = self.ticket_service.get_tickets_by_user(user_id)
-            print(user.to_json())
-            print([user_ticket.to_json() for user_ticket in user_tickets])
+            print(user)
+            for user_ticket in user_tickets:
+                print(user_ticket)
         except NotFoundError as e:
             print(e)
         except ValueError:
@@ -193,8 +194,10 @@ class AdminInterface:
             print(f"User '{username}' not found")
             return
         else:
-            print(user.to_json())
-            print([user_ticket.to_json() for user_ticket in user_tickets])
+            print(user)
+            for ticket in user_tickets:
+                print(ticket)
+
     
     def create_admin(self):
         username = input("Admin username: ")
@@ -225,7 +228,7 @@ class AdminInterface:
         try:
             ticket_id = int(input("Enter ticket ID: "))
             ticket = self.ticket_service.get_ticket_by_id(ticket_id)
-            print(ticket.to_json())
+            print(ticket)
         except NotFoundError as e:
             print(e)
         except ValueError:

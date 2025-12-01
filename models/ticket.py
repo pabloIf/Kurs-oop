@@ -18,3 +18,12 @@ class Ticket:
             "seat_class": self.seat_class,
             "quantity": self.quantity
         }
+    
+    def __str__(self):
+        return (
+            f"\nTicket #{self.ticket_id}\n"
+            f"User ID: {self.user_id}\n"
+            f"Flight ID: {self.flight_id}\n"
+            f"Class: {self.seat_class}\n"
+            f"Quantity: {self.quantity}\n"
+        )

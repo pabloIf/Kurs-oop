@@ -20,3 +20,12 @@ class Flight:
             "arrival": self.arrival,
             "seats": self.seats
         }
+
+    def __str__(self):
+        return (
+            f"\nID: {self.flight_id}\n"
+            f"Маршрут: {self.origin} → {self.destination}\n"
+            f"Виліт: {self.departure}\n"
+            f"Прибуття: {self.arrival}\n"
+            f"Місця: {self.seats}\n"
+        )

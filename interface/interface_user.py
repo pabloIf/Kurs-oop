@@ -1,108 +1,5 @@
 from exceptions.errors import NotFoundError, IncorrectDataError, NotEnouhtSeatsError
 
-# flight_service = FlightServices(db)
-# ticket_service = TicketServices(db, flight_service)
-
-# def user_menu(user):
-#     while True:
-#         print(f"\nUSER PANEL — {user.username}")
-#         print("1. View all flights")
-#         print("2. Search flight by ID")
-#         print("3. Book ticket")
-#         print("4. My tickets")
-#         print("5. Cancel ticket")
-#         print("6. Profile info")
-#         print("0. Exit")
-
-#         choice = input("Select: ")
-#         print("\n")
-#         if choice == "1":
-#             handle_view_all_flights()
-#         elif choice == "2":
-#             handle_search_flight()
-#         elif choice == "3":
-#             handle_book_ticket(user)
-#         elif choice == "4":
-#             handle_user_tickets(user)
-#         elif choice == "5":
-#             handle_cancel_ticket()
-#         elif choice == "6":
-#             handleuser_profile(user)
-#             print("My tickets: ")
-#             handle_user_tickets(user)
-#         elif choice == "0":
-#             break
-#         else:
-#             print("Invalid choice")
-
-# def get_int_input(prompt):
-#     while True:
-#         try:
-#             return int(input(prompt))
-#         except ValueError:
-#             print("please enter a valid number")
-
-# def handle_view_all_flights():
-#     flights = flight_service.get_all_flights()
-#     for f in flights:
-#         print(f.to_json())
-
-# def handle_search_flight():
-#     flight_id = int(input("Enter flight ID: "))
-#     try:
-#         flight = flight_service.get_flight_by_id(flight_id)
-#         print(flight.to_json())
-#     except NotFoundError as e:
-#         print(e)
-
-# def handle_book_ticket(user):
-#     while True:
-#         flight_id = get_int_input("Enter flight ID to book: ")
-#         try:
-#             flight = flight_service.get_flight_by_id(flight_id)
-#         except NotFoundError as e:
-#             print(e)
-#             break
-#         print(f"Available seats: \n1. First class: {flight.seats["first_class"]}\n2. Business class: {flight.seats["business_class"]}\n3. Econom class: {flight.seats["econom_class"]}")
-#         seat_choice = input("Choice: ")
-#         if seat_choice == "1":
-#             seat_class = "first_class"
-#         elif seat_choice == "2":
-#             seat_class = "business_class"
-#         elif seat_choice == "3":
-#             seat_class = "econom_class"
-#         else:
-#             print("Invalid choice, try again.")
-#             continue
-
-#         quantity = get_int_input("Quantity: ")
-#         try:
-#             ticket = ticket_service.book_ticket(flight_id, user.user_id, seat_class, quantity)
-#             print("Ticket booked:", ticket.to_json())
-#             return
-#         except (NotFoundError, IncorrectDataError, NotEnouhtSeatsError) as e:
-#             print(e)
-#         return
-    
-# def handle_user_tickets(user):
-#     tickets = ticket_service.get_tickets_by_user(user.user_id)
-#     for t in tickets:
-#         print(t.to_json())
-
-# def handle_cancel_ticket():
-#     ticket_id = get_int_input("Enter ticket ID to cancel: ")
-#     try:
-#         ticket_service.cancel_ticket(ticket_id)
-#         print("Ticket canceled")
-#     except NotFoundError as e:
-#         print(e)
-
-# def handleuser_profile(user):
-#     print(f"\nUsername: {user.username}\nRole: {user.role}")
-
-
-
-
 class UserInterface:
     def __init__(self, flight_service, ticket_service):
         self.flight_service = flight_service
@@ -145,13 +42,13 @@ class UserInterface:
         if not flights:
             print("No flights found")
         for f in flights:
-            print(f.to_json())
+            print(f)
 
     def search_flight(self):
         try:
             flight_id = int(input("Enter flight ID: "))
             flight = self.flight_service.get_flight_by_id(flight_id)
-            print(flight.to_json())
+            print(flight)
         except NotFoundError as e:
             print(e)
         except ValueError:
@@ -177,7 +74,7 @@ class UserInterface:
 
                 quantity = int(input("Quantity: "))
                 ticket = self.ticket_service.book_ticket(flight_id, self.user.user_id, seat_class, quantity)
-                print("Ticket booked:", ticket.to_json())
+                print("Ticket booked:", ticket)
                 break
             except (ValueError, NotFoundError, IncorrectDataError, NotEnouhtSeatsError) as e:
                 print(e)
@@ -187,7 +84,7 @@ class UserInterface:
         if not tickets:
             print("No tickets found")
         for t in tickets:
-            print(t.to_json())
+            print(t)
 
     def cancel_ticket(self):
         try:

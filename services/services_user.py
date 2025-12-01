@@ -5,7 +5,7 @@ from exceptions.errors import AlreadyExistsError, NotFoundError
 class UserServices:
     def __init__(self, storage, ticket_service: TicketServices):
         self.storage = storage
-        self.ticket_servece = ticket_service
+        self.ticket_service = ticket_service
 
     def create_user(self, username, password, role="user"):
         if self.get_user_by_name(username):
@@ -22,9 +22,9 @@ class UserServices:
     def delete_user(self, user_id):
         user = self.get_user_by_id(user_id)
         
-        tickets = self.ticket_servece.get_tickets_by_user(user_id)
+        tickets = self.ticket_service.get_tickets_by_user(user_id)
         for ticket in tickets:
-            self.ticket_servece.cancel_ticket(ticket.ticket_id)
+            self.ticket_service.cancel_ticket(ticket.ticket_id)
         return self.storage.del_user(user_id)
 
     def get_user_by_id(self, user_id):
