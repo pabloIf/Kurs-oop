@@ -57,7 +57,7 @@ class UserInterface:
     def book_ticket(self):
         while True:
             try:
-                flight_id = int(input("Enter flight ID to book: "))
+                flight_id = int(input("\nEnter flight ID to book: "))
                 flight = self.flight_service.get_flight_by_id(flight_id)
 
                 print(f"Available seats: \n1. First class: {flight.seats['first_class']}\n2. Business class: {flight.seats['business_class']}\n3. Econom class: {flight.seats['econom_class']}")
@@ -74,7 +74,7 @@ class UserInterface:
 
                 quantity = int(input("Quantity: "))
                 ticket = self.ticket_service.book_ticket(flight_id, self.user.user_id, seat_class, quantity)
-                print("Ticket booked:", ticket)
+                print("Ticket booked:\n", ticket)
                 break
             except (ValueError, NotFoundError, IncorrectDataError, NotEnouhtSeatsError) as e:
                 print(e)
@@ -83,6 +83,7 @@ class UserInterface:
         tickets = self.ticket_service.get_tickets_by_user(self.user.user_id)
         if not tickets:
             print("No tickets found")
+        print("\nYour ticket:")
         for t in tickets:
             print(t)
 
